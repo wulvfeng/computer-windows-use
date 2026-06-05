@@ -1,0 +1,53 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "computer-mcp"
+version = "0.1.0"
+description = "MCP server for multimodal LLM computer control with human-like interaction"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+
+dependencies = [
+    # MCP 框架
+    "mcp>=1.0.0",
+    # 数据模型
+    "pydantic>=2.0",
+    "pydantic-settings>=2.0",
+    # 输入控制
+    "pynput>=1.7",
+    # 截图
+    "Pillow>=10.0",
+    "mss>=9.0",
+    # 窗口管理
+    "pywin32>=306",
+    "psutil>=5.9",
+    # 日志
+    "loguru>=0.7",
+]
+
+[project.optional-dependencies]
+# 拟人化驱动（可选）
+human = [
+    "human-mouse>=0.0.1",
+    "humandriver>=0.0.1",
+]
+# 开发依赖
+dev = [
+    "pytest>=7.0",
+    "pytest-asyncio>=0.21",
+    "ruff>=0.1",
+]
+
+[project.scripts]
+computer-mcp = "main:main"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
